@@ -3,21 +3,20 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <div class="title-center">
-          <img
-            src="../../public/vertikalnyj-logo.png"
-            alt="vertikalnyj-logo"
-            height="110"
-            width="202"
-            class="title-center"
-          />
+          <img 
+          src="https://www.prodo.ru/upload/iblock/8c5/ean2e9rhf07i24d7sqzhjg8dbds0a7xe.jpg"
+          alt=""
+          width="100px"
+          style="display: block; margin: 20px auto; max-width: 300px; border-radius: 777px;"
+        >
         </div>
-        <ion-title> Simple Application</ion-title>
+        <ion-title>Omsk Bacon Technical Support</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Simple Application</ion-title>
+          <ion-title size="large">Omsk Bacon Technical Support</ion-title>
         </ion-toolbar>
       </ion-header>
       <div id="container" class="fl">

@@ -19,13 +19,12 @@
 
       <div id="container" class="fl">
         <div class="title-center">
-          <img
-            src="../../public/vertikalnyj-logo.png"
-            alt="vertikalnyj-logo"
-            height="220"
-            width="404"
-            class="title-center"
-          />
+          <img 
+          src="https://www.prodo.ru/upload/iblock/8c5/ean2e9rhf07i24d7sqzhjg8dbds0a7xe.jpg"
+          alt=""
+          width="100px"
+          style="display: block; margin: 20px auto; max-width: 300px; border-radius: 777px;"
+        >
         </div>
         <ion-input placeholder="Логин" v-model="login"></ion-input>
         <ion-input
