@@ -153,8 +153,8 @@ const statuses = ref([
 const role: ComputedRef<string> = computed(() => store.user.role);
 
 const filteredPostsByName = computed(() => {
-  if (!search.value) return posts.value;
-  return posts.value.filter((el) =>
+  if (!search.value) return [...posts.value];
+  return [...posts.value].filter((el) =>
     el.name
       .toLowerCase()
       .includes(search.value.toLowerCase().normalize().trim())
@@ -184,11 +184,15 @@ const filteredPosts = computed(() => {
 
 onMounted(async () => {
   await updatePosts();
-  //setInterval(async () => await updatePosts(), 5_000);
+  setInterval(async () => await updatePosts(), 5_000);
 });
 
-const updatePosts = async () =>
-  (posts.value = await getPosts(store.accesToken));
+const updatePosts = async () => {
+  const rawPosts = await getPosts(store.accesToken);
+  posts.value = rawPosts.sort((a, b) => 
+    new Date(b.createdAt ?? '').getTime() - new Date(a.createdAt ?? '').getTime()
+  );
+}
 
 const sendPost = async () => {
   if (
