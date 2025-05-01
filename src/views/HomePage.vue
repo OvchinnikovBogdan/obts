@@ -22,7 +22,18 @@
       <div id="container" class="fl">
         <div v-if="role === 'admin'">
           <ion-card>
-            <ion-title>Количество заявок: {{ filteredPosts.length }}</ion-title>
+            <ion-card-content>
+              <ion-title>Количество заявок: {{ filteredPosts.length }}</ion-title>
+            <div>&nbsp;</div>
+            <ion-input 
+              label="Имя техника"
+              placeholder="Заполните для изменения статуса" 
+              v-model="name"
+              fill="outline"
+              label-placement="floating"
+              :counter="true"
+              :maxlength="50"
+            />
             <ion-searchbar
               placeholder="Название"
               v-model="search"
@@ -45,6 +56,7 @@
               :multiple="true"
               @ion-change="(ev) => updateDates(ev?.detail?.value)"
             ></ion-datetime>
+            </ion-card-content>
           </ion-card>
           <the-card
             v-for="post in filteredPosts"
@@ -151,6 +163,14 @@ const statuses = ref([
 ]);
 
 const role: ComputedRef<string> = computed(() => store.user.role);
+const name = computed({
+  get: () => {
+    return store.masterName
+  },
+  set: (value: string) => {
+    store.masterName = value;
+  }
+});
 
 const filteredPostsByName = computed(() => {
   if (!search.value) return [...posts.value];
@@ -225,8 +245,15 @@ const updateDates = (array: any) => {
 </script>
 
 <style scoped>
-.Indentation {
-  margin-left: 10px;
+.custom-input {
+  --border-radius: 6px;
+  --padding-start: 12px;
+  --border-width: 1px;
+}
+
+.Indentation ion-input,
+.Indentation ion-select {
+  margin: 10px 0;
 }
 
 .title-center {

@@ -18,8 +18,8 @@
         <div></div>
         Описание: <b>{{ post?.description }}</b>
         <div></div>
-        Статус:
-        <select placeholder="Статус" v-model="status" @change="changeStatus">
+        Статус <template v-if="!masterNameComp.length">(Введите имя техника для изменения)</template>:
+        <select placeholder="Статус" v-model="status" @change="changeStatus" :disabled="!masterNameComp.length">
           <option
             v-for="(status, idx) in statuses"
             :key="idx"
@@ -35,6 +35,9 @@
         <div></div>
         Отправитель: <b>{{ username }}</b>
         <div></div>
+        <div v-if="post?.masterName">
+          Мастер: {{ post?.masterName }}
+        </div>
         <ion-button @click="deletePost">Удалить</ion-button>
       </ion-card-content>
     </ion-card>
@@ -50,7 +53,7 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useUserStore } from "@/stores/userStore";
 
 const store = useUserStore();
@@ -74,6 +77,7 @@ const statuses = ref([
 const post = ref(props.data);
 const status = ref(post.value?.status);
 const username = ref("");
+const masterNameComp = computed(() => store.masterName);
 
 onMounted(() => getUserById());
 
@@ -89,6 +93,7 @@ const changeStatus = async () => {
       headers,
       body: JSON.stringify({
         status: status.value,
+        masterName: masterNameComp.value,
       }),
       redirect: "follow",
     });

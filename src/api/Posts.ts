@@ -9,6 +9,7 @@ export interface IPost {
   type: string;
   status?: "open" | "close" | "inProcess";
   location: string;
+  masterName?: string;
 }
 
 export const addPost = async (
